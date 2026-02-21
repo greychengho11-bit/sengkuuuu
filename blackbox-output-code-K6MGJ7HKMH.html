@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Jesen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #2c2c2c;
+            color: #ffb7b2;
+            font-family: 'VT323', monospace;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        h1, h2, button, input {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        #login-screen {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border: 4px solid #ffb7b2;
+            box-shadow: 10px 10px 0px #ff6f91;
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            color: #ffdac1;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            background: #333;
+            border: 2px solid #ffb7b2;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus {
+            background: #444;
+        }
+
+        button {
+            background-color: #ff6f91;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.1s;
+            box-shadow: 4px 4px 0px #c92a4f;
+        }
+
+        button:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+
+        .error-msg {
+            color: #ff4757;
+            margin-top: 10px;
+            font-size: 0.7rem;
+            display: none;
+        }
+
+        #main-content {
+            display: none;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .big-sticker {
+            font-size: 6rem;
+            margin: 20px 0;
+            display: inline-block;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 183, 178, 0.5));
+        }
+
+        .message-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px dashed #ffb7b2;
+            margin-top: 20px;
+            line-height: 1.8;
+            font-size: 1.5rem;
+            text-align: left;
+            color: #fff;
+        }
+
+        .sticker-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .sticker-row span {
+            font-size: 4rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .sticker-row span:hover {
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        #goodbye-screen {
+            display: none;
+            color: #e0e0e0;
+        }
+
+        .grey-text {
+            color: #a0a0a0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-30px);}
+            60% {transform: translateY(-15px);}
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -10vh;
+            font-size: 1.5rem;
+            color: #ff6f91;
+            animation: floatUp linear infinite;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hearts-container"></div>
+
+    <div id="login-screen" class="container">
+        <h2 style="margin-bottom: 30px; color: #ffb7b2;">ACCESS YOUR HEART</h2>
+        
+        <div class="input-group">
+            <label for="username">USERNAME</label>
+            <input type="text" id="username" placeholder="Masukkan Username...">
+        </div>
+        
+        <div class="input-group">
+            <label for="password">PASSWORD</label>
+            <input type="password" id="password" placeholder="Masukkan Password...">
+        </div>
+
+        <p class="error-msg" id="error-msg">Yahh, salah kata kunci nih... Coba lagi ya!</p>
+        
+        <button onclick="checkLogin()">BUKA PUPUKU</button>
+    </div>
+
+    <div id="main-content" class="container">
+        <div class="big-sticker">🫂</div>
+        <h2 style="color: #ffb7b2; margin-bottom: 20px;">VIRTUAL HUG FOR YOU</h2>
+
+        <div class="message-box">
+            <p>
+                sayanggg, aku tau kondisi kamu kalau lagi badmood, aku tau kondisi kamu ketika sedih, aku tau kondisi kamu ketika marah, kesel dan overthingking, its okayy sayangg.. semua manusia layak mendapatkan perasaan yang seperti itu, tapi kamu juga harus bisa mengontrol semuanya ya sayangg.. i'll be here for uuu... i love you sayangggggg, happy terus yyaaaaa-!!!!
+            </p>
+        </div>
+
+        <div class="sticker-row">
+            <span title="Hug Lagi">🫂</span>
+            <span title="Kiss">😘</span>
+            <span title="Bye">👋</span>
+        </div>
+    </div>
+
+    <div id="goodbye-screen" class="container">
+        <div class="big-sticker" style="font-size: 4rem;">👋</div>
+        <h2 class="grey-text" style="margin-top: 20px;">Sampai jumpa di website grey berikutnya ya sayanggg</h2>
+        <p style="margin-top: 20px; color: #666;">(Tekan F5 untuk peluk lagi)</p>
+    </div>
+
+    <script>
+        function checkLogin() {
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+            const loginScreen = document.getElementById('login-screen');
+
+            if (user.toUpperCase() === "JESEN" && pass === "ALDY GEOL") {
+                loginScreen.style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                createHearts(20);
+
+                setTimeout(() => {
+                    document.getElementById('main-content').style.display = 'none';
+                    document.getElementById('goodbye-screen').style.display = 'block';
+                    createHearts(50);
+                }, 15000);
+
+            } else {
+                errorMsg.style.display = 'block';
+                loginScreen.style.animation = 'shake 0.5s';
+                
+                setTimeout(() => {
+                    loginScreen.style.animation = '';
+                }, 500);
+            }
+        }
+
+        function createHearts(amount) {
+            const container = document.getElementById('hearts-container');
+            for (let i = 0; i < amount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                container.appendChild(heart);
+            }
+        }
+
+        // Buat beberapa hati di background login
+        createHearts(10);
+    </script>
+</body>
+</html>
